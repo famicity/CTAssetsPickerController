@@ -209,13 +209,7 @@
             
             if (!self.picker.showsEmptyAlbums)
             {
-                PHFetchOptions *options = [PHFetchOptions new];
-                options.predicate = self.picker.assetsFetchOptions.predicate;
-                
-                if ([options respondsToSelector:@selector(setFetchLimit:)])
-                    options.fetchLimit = 1;
-                
-                NSInteger count = [assetCollection ctassetPikcerCountOfAssetsFetchedWithOptions:options];
+                NSInteger count = [assetCollection estimatedAssetCount];
                 
                 showsAssetCollection = (count > 0);
             }
