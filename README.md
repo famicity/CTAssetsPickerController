@@ -1,5 +1,9 @@
 # CTAssetsPickerController
 
+## Reason for forking
+
+The performance of the library on opening was not that great. The culprit for this lies in the `CTAssetCollectionViewController` class, more specifically in the `updateAssetCollections` method. The original version of the method fetched the assets in each collection and got the count of them from the fetched objects. Although this gives an exact number, it is very slow to perform on multiple collections (a fetch is performed for each individual collection). An alternative approach is to use the `estimatedAssetCount` method of the collection. This gives a cached number and does not perform a fetch. It may not be the exact one (most of the time it is, though), but for the purpose of filtering out the empty collections, I believe it is a good enough approximation. Using this approach the time to load the picker drops dramatically (on an iPhone 7 Plus with iOS 10.2.1 with ~9000 photos and ~80 collections it dropped from ~4.5 sec to ~0.2 sec).
+
 ## Development Suspended (1 June, 2016)
 
 As I am busy on both of my work and personal life, it seems that I have no more spare time to maintain this project in coming year. The development of this project is suspended. Anyone who would like to keep this project running, just fork it. 
